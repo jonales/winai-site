@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>WINAI Gestão Integrada</title>
+<meta name="description" content="Plataforma web de gestão para redes de lojas, integrada ao ERP Winthor: pedidos, caixa com NFC-e, PIX, transferências, metas e etiquetas.">
+<meta name="theme-color" content="#0c1220">
+<meta property="og:title" content="WINAI Gestão Integrada">
+<meta property="og:description" content="A loja inteira, direto no Winthor.">
+<meta property="og:image" content="winai-logo.png">
+<link rel="icon" href="winai-logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=Geist:wght@300..700&family=Geist+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="scrollcraft.css">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<a class="pular" href="#balcao">Pular para o conteúdo</a>
+<span data-sc-progress></span>
+<div class="sc-grain" aria-hidden="true"></div>
+
+<!-- Fólio: a navegação da gramática editorial. Capítulo atual e título, na margem. -->
+<nav class="folio" aria-label="Capítulos">
+  <a class="folio__marca" href="#topo" aria-label="Início">
+    <img src="winai-logo.png" width="28" height="28" alt="">
+  </a>
+  <ol class="folio__lista">
+    <li><a href="#balcao" data-ir="balcao">I</a></li>
+    <li><a href="#winthor" data-ir="winthor">II</a></li>
+    <li><a href="#intervalo" data-ir="venda">III</a></li>
+    <li><a href="#sozinho" data-ir="sozinho">IV</a></li>
+    <li><a href="#acervo" data-ir="acervo">V</a></li>
+    <li><a href="#acesso" data-ir="acesso">VI</a></li>
+    <li><a href="#bancada" data-ir="bancada">VII</a></li>
+  </ol>
+  <p class="folio__atual" aria-live="polite"><span class="folio__num"></span><span class="folio__titulo"></span></p>
+</nav>
+
+<main id="topo">
+
+  <!-- 0 · Folha de rosto: só tipo, sem mídia acima da dobra -->
+  <header class="rosto chao-escuro" data-capitulo="" data-titulo="">
+    <div class="rosto__miolo">
+      <p class="rosto__marca"><img src="winai-logo.png" width="44" height="44" alt=""> WINAI Gestão Integrada</p>
+      <h1 class="rosto__titulo">A loja inteira, direto no&nbsp;Winthor.</h1>
+      <p class="rosto__sub">Pedidos, caixa com NFC-e, PIX, transferências, metas e etiquetas para todas as filiais, numa tela web.</p>
+    </div>
+    <p class="rosto__rodape"><span>4C3RT0 Sistemas</span><span>Apresentação, outubro de 2026</span></p>
+  </header>
+
+  <!-- I · O balcão: parallax na coluna de mídia -->
+  <section id="balcao" class="cap chao-papel" data-capitulo="I" data-titulo="O balcão" data-sc-act="flow">
+    <div class="cap__grade cap__grade--balcao">
+      <div class="cap__texto sc-stack" data-sc-in data-sc-stagger="60">
+        <p class="cap__num">I</p>
+        <h2 class="cap__h2">Tudo que a loja faz, numa tela&nbsp;só.</h2>
+        <p class="cap__corpo">As rotinas do dia a dia da loja e da gestão ficam numa única aplicação web, sem instalar nada nas máquinas. Funciona no computador, no tablet e no celular, e pode ser instalada como aplicativo.</p>
+        <p class="cap__corpo">O acesso é o do Winthor: usuário e senha do ERP, e cada tela respeita as permissões de rotina já cadastradas para o usuário.</p>
+      </div>
+      <figure class="midia midia--balcao">
+        <div class="midia__quadro midia__quadro--alto" data-sc-parallax="-0.5">
+          <img src="telas/01-dashboard.jpg" width="1366" height="1513" loading="lazy" decoding="async" alt="Painel inicial do WINAI com os atalhos das rotinas e indicadores da filial">
+        </div>
+        <div class="midia__quadro midia__quadro--sobre" data-sc-parallax="0.7">
+          <img src="telas/27-login.jpg" width="1366" height="740" loading="lazy" decoding="async" alt="Tela de login do WINAI, com usuário e senha do Winthor">
+        </div>
+        <figcaption>Painel inicial e login. Capturas feitas em homologação; dados de clientes e valores aparecem desfocados de propósito.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- II · Direto no Winthor: a tabela entra por wipe -->
+  <section id="winthor" class="cap chao-escuro" data-capitulo="II" data-titulo="Direto no Winthor" data-sc-act="flow">
+    <div class="cap__grade cap__grade--winthor">
+      <div class="cap__texto sc-stack" data-sc-in data-sc-stagger="60">
+        <p class="cap__num">II</p>
+        <h2 class="cap__h2">Não existe base paralela.</h2>
+        <p class="cap__corpo">O WINAI lê e grava nas mesmas tabelas do ERP e segue as regras das rotinas originais. Nada para sincronizar, nada para conferir duas&nbsp;vezes.</p>
+      </div>
+      <div class="rotinas" data-sc-reveal="up" data-sc-reveal-at="0.12 0.5">
+        <table>
+          <caption>Rotina do Winthor e a tela que faz o mesmo no WINAI</caption>
+          <thead><tr><th scope="col">Rotina</th><th scope="col">No Winthor</th><th scope="col">No WINAI</th></tr></thead>
+          <tbody>
+            <tr><td>316</td><td>Pedido de venda</td><td>Novo pedido, com leitor de código de barras ou câmera</td></tr>
+            <tr><td>336</td><td>Autorização de preço</td><td>Lançar desconto em pedido</td></tr>
+            <tr><td>1360</td><td>Devolução de cupom</td><td>Devolução com nota de entrada, estoque e crédito</td></tr>
+            <tr><td>1124</td><td>Transferência entre filiais</td><td>Nova transferência e conferência</td></tr>
+            <tr><td>357</td><td>Política de preço</td><td>Política de preço fixo</td></tr>
+            <tr><td>2075</td><td>Frente de caixa</td><td>Caixa no navegador, com as mesmas teclas</td></tr>
+            <tr><td>410</td><td>Acerto de caixa</td><td>Enxerga o caixa web como enxerga os PDVs</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intertítulo: silêncio autoral antes do pico -->
+  <section id="intervalo" class="intertitulo chao-escuro" data-capitulo="III" data-titulo="Uma venda">
+    <div class="intertitulo__miolo" data-sc-in>
+      <p class="intertitulo__num" aria-hidden="true">III</p>
+      <h2 class="intertitulo__linha">Uma venda, do começo ao&nbsp;fim.</h2>
+    </div>
+  </section>
+
+  <!-- III · PICO: pin longo. As telas trocam e a bobina imprime ao lado. -->
+  <section id="venda" class="venda chao-escuro" data-capitulo="III" data-titulo="Uma venda" data-sc-act="pin" data-sc-span="6">
+    <div data-sc-stage class="venda__palco">
+      <p class="venda__cabeca">III · Uma venda no caixa web</p>
+
+      <ol class="venda__passos">
+        <li data-sc-cue="0 0.2 0 0.03"><span class="venda__etapa">Venda</span><p>O operador tecla A, passa os produtos no leitor e vê o cupom se formar, com as teclas da rotina&nbsp;2075.</p></li>
+        <li data-sc-cue="0.2 0.4 0.03 0.03"><span class="venda__etapa">Fechamento, F1</span><p>Dinheiro com troco, cartão com a bandeira, PIX: as finalizadoras da filial. A venda vira pedido no&nbsp;Winthor.</p></li>
+        <li data-sc-cue="0.4 0.6 0.03 0.03"><span class="venda__etapa">PIX</span><p>O QR Code sai na hora e a tela confere o pagamento sozinha. Pago, o título é baixado no&nbsp;Winthor.</p></li>
+        <li data-sc-cue="0.6 0.8 0.03 0.03"><span class="venda__etapa">NFC-e</span><p>O próprio WINAI emite a nota na SEFAZ da UF da filial, com contingência quando a SEFAZ não&nbsp;responde.</p></li>
+        <li data-sc-cue="0.8 1 0.03 0.03"><span class="venda__etapa">Cupom</span><p>O cliente recebe o cupom por e-mail ou WhatsApp, e o movimento do dia fica pronto para o acerto na&nbsp;410.</p></li>
+      </ol>
+
+      <div class="venda__telas">
+        <figure class="venda__tela" data-sc-cue="0 0.2 0 0.04"><img src="telas/46-frente-caixa-venda.jpg" width="1349" height="1007" alt="Frente de caixa com dois itens no cupom e total de 90,97"><figcaption>Frente de caixa</figcaption></figure>
+        <figure class="venda__tela" data-sc-cue="0.17 0.4 0.04 0.04"><img src="telas/48-frente-caixa-fechamento.jpg" width="1349" height="948" loading="lazy" alt="Fechamento da venda com as formas de pagamento, troco e falta"><figcaption>Fechamento (F1)</figcaption></figure>
+        <figure class="venda__tela" data-sc-cue="0.37 0.6 0.04 0.04"><img src="telas/37-emitir-pix-paga.jpg" width="1366" height="900" loading="lazy" alt="Cobrança PIX com QR Code marcada como paga"><figcaption>PIX pago, conferido na tela</figcaption></figure>
+        <figure class="venda__tela venda__tela--danfe" data-sc-cue="0.57 0.8 0.04 0.04"><img src="telas/61-danfe-nfce.jpg" width="300" height="556" loading="lazy" alt="DANFE da NFC-e de 80 mm com QR Code, emitido em homologação"><figcaption>DANFE NFC-e real, emitido em homologação</figcaption></figure>
+        <figure class="venda__tela" data-sc-cue="0.77 1 0.04 0.04"><img src="telas/67-caixa-enviar-cupom.jpg" width="1366" height="683" loading="lazy" alt="Envio do cupom ao cliente por e-mail ou WhatsApp"><figcaption>Enviar o cupom ao cliente</figcaption></figure>
+      </div>
+
+      <!-- A bobina: o movimento-assinatura. O papel sobe da impressora conforme o --sc-p do ato. -->
+      <div class="bobina" aria-label="Cupom de demonstração impresso conforme a venda avança">
+        <div class="bobina__janela">
+          <div class="bobina__papel">
+            <div class="bobina__trecho" data-passo="0">
+              <p class="r-c r-forte">WINAI · CAIXA WEB</p>
+              <p class="r-c">Venda de demonstração</p>
+              <p class="r-c r-caixa">HOMOLOGAÇÃO · SEM VALOR FISCAL</p>
+              <p class="r-sep"></p>
+              <p>001 KIT BELINHA STUDIO 8102</p>
+              <p class="r-l"><span>&nbsp;&nbsp;2 UN x 11,99</span><span>23,98</span></p>
+              <p>002 CAMINHAO TANDY BOMBEIRO</p>
+              <p class="r-l"><span>&nbsp;&nbsp;1 UN x 66,99</span><span>66,99</span></p>
+            </div>
+            <div class="bobina__trecho" data-passo="1">
+              <p class="r-sep"></p>
+              <p class="r-l"><span>Itens</span><span>2</span></p>
+              <p class="r-l r-forte r-grande"><span>A pagar R$</span><span>90,97</span></p>
+              <p class="r-l"><span>Dinheiro</span><span>50,00</span></p>
+              <p class="r-l"><span>PIX</span><span>40,97</span></p>
+            </div>
+            <div class="bobina__trecho" data-passo="2">
+              <p class="r-sep"></p>
+              <p class="r-l"><span>PIX confirmado</span><span>40,97</span></p>
+              <p>Título baixado no Winthor</p>
+            </div>
+            <div class="bobina__trecho" data-passo="3">
+              <p class="r-sep"></p>
+              <p class="r-c r-forte">NFC-e AUTORIZADA</p>
+              <p class="r-c">Consulte pela chave de acesso</p>
+              <div class="r-qr" role="img" aria-label="QR Code da NFC-e de homologação"></div>
+            </div>
+            <div class="bobina__trecho" data-passo="4">
+              <p class="r-sep"></p>
+              <p class="r-c">Cupom enviado ao cliente</p>
+              <p class="r-c">por WhatsApp</p>
+              <p class="r-sep"></p>
+              <p class="r-c r-forte">Gravado no Winthor</p>
+              <p class="r-c">pedido · caixa · NFC-e</p>
+              <p class="r-serrilha" aria-hidden="true"></p>
+            </div>
+          </div>
+        </div>
+        <div class="bobina__impressora" aria-hidden="true"><span class="bobina__fenda"></span><span class="bobina__luz"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IV · Sozinho: números reais, contados ao entrar -->
+  <section id="sozinho" class="cap chao-papel" data-capitulo="IV" data-titulo="Sozinho">
+    <div class="cap__grade cap__grade--sozinho">
+      <div class="cap__texto sc-stack" data-sc-in data-sc-stagger="60">
+        <p class="cap__num">IV</p>
+        <h2 class="cap__h2">O que roda enquanto a loja&nbsp;vende.</h2>
+        <p class="cap__corpo"><b>Faturamento automático.</b> Fatura os pedidos liberados das filiais configuradas, confere a nota, ajusta o estoque quando falta saldo e avisa no WhatsApp.</p>
+        <p class="cap__corpo"><b>OTO CRM.</b> Todo dia, as vendas do dia anterior e os cadastros que elas usam vão ao CRM. O que falhou é tentado de novo e os dias que ficaram para trás são recuperados.</p>
+        <p class="cap__corpo"><b>PIX.</b> Pago, o título é baixado sozinho no Winthor; a devolução só sai com aprovação de um responsável.</p>
+      </div>
+      <div class="placar" data-sc-in>
+        <p class="placar__item"><span class="placar__n" data-conta="54">54</span><span class="placar__r">envios ao OTO CRM</span></p>
+        <p class="placar__item"><span class="placar__n" data-conta="9519">9.519</span><span class="placar__r">registros aceitos</span></p>
+        <p class="placar__nota">Carga de 01 a 09/10/2026, em produção.</p>
+      </div>
+      <figure class="midia midia--sozinho" data-sc-in>
+        <div class="midia__quadro midia__quadro--recorte"><img src="telas/09-faturamento-automatico.jpg" width="1366" height="1601" loading="lazy" decoding="async" alt="Faturamento automático: configuração por filial, situação do agendador e histórico"></div>
+        <figcaption>Faturamento automático: configuração por filial, agendador e histórico.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- V · O acervo: trilho lateral, etiquetas de museu -->
+  <section id="acervo" class="acervo chao-escuro" data-capitulo="V" data-titulo="O acervo" data-sc-act="pan" data-sc-span="4.6">
+    <div data-sc-stage class="acervo__palco">
+      <div class="acervo__trilho" data-sc-pan="0.04">
+        <div class="acervo__abre">
+          <p class="cap__num">V</p>
+          <h2 class="cap__h2">O acervo.</h2>
+          <p class="cap__corpo">Cada tela e o que ela faz.</p>
+        </div>
+        <article class="peca"><div class="peca__img"><img src="telas/04-novo-pedido.jpg" width="1366" height="1418" loading="lazy" alt="Tela de novo pedido"></div><h3>Pedidos</h3><p class="peca__quem">Vendedor</p><p>Pedido completo com leitor ou câmera; orçamento na mesma tela.</p></article>
+        <article class="peca"><div class="peca__img"><img src="telas/08-devolucao-cupom.jpg" width="1366" height="1365" loading="lazy" alt="Tela de devolução de cupom fiscal"></div><h3>Devolução</h3><p class="peca__quem">Balcão</p><p>Nota de entrada, estoque, estorno de comissão e crédito do cliente.</p></article>
+        <article class="peca"><div class="peca__img"><img src="telas/10-nova-transferencia.jpg" width="1366" height="858" loading="lazy" alt="Tela de nova transferência entre filiais"></div><h3>Transferência</h3><p class="peca__quem">Estoque</p><p>Entre filiais, com conferência na chegada.</p></article>
+        <article class="peca"><div class="peca__img"><img src="telas/13-conferencia-bonus.jpg" width="1366" height="769" loading="lazy" alt="Tela de conferência de bônus"></div><h3>Bônus</h3><p class="peca__quem">Recebimento</p><p>Conferência da entrada item a item, pelo leitor.</p></article>
+        <article class="peca"><div class="peca__img"><img src="telas/15-gestao-inventario.jpg" width="1366" height="973" loading="lazy" alt="Tela de gestão do inventário"></div><h3>Inventário</h3><p class="peca__quem">Estoque</p><p>Contagem e gestão do inventário.</p></article>
+        <article class="peca"><div class="peca__img"><img src="telas/18-configuracao-metas.jpg" width="1366" height="1073" loading="lazy" alt="Tela de configuração de metas"></div><h3>Metas</h3><p class="peca__quem">Gestão</p><p>Por vendedor, supervisor, gerente e comprador, com relatório.</p></article>
+        <article class="peca"><div class="peca__img"><img src="telas/20-etiquetas.jpg" width="1366" height="1559" loading="lazy" alt="Editor de etiquetas"></div><h3>Etiquetas</h3><p class="peca__quem">Loja</p><p>Editor visual, Zebra ou impressora comum, oferta De/Por.</p></article>
+        <article class="peca"><div class="peca__img"><img src="telas/30-terminal-consulta-preco-produto.jpg" width="1366" height="768" loading="lazy" alt="Terminal de consulta de preço mostrando um produto"></div><h3>Preço</h3><p class="peca__quem">Cliente</p><p>Terminal com leitor e propagandas em tela cheia, sem login.</p></article>
+        <div class="acervo__fecha">
+          <p>E ainda: vendas por filial, política de preço fixo, desconto com autorização, disparos de WhatsApp e relatório PIX.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VI · Quem entra: parallax na mídia, contadores reais -->
+  <section id="acesso" class="cap chao-papel" data-capitulo="VI" data-titulo="Quem entra" data-sc-act="flow">
+    <div class="cap__grade cap__grade--acesso">
+      <figure class="midia midia--acesso">
+        <div class="midia__quadro midia__quadro--recorte" data-sc-parallax="-0.4"><img src="telas/63-auditoria.jpg" width="1366" height="1996" loading="lazy" decoding="async" alt="Auditoria: uso por loja, tentativas de login e IPs"></div>
+        <div class="midia__quadro midia__quadro--sobre" data-sc-reveal="right" data-sc-reveal-at="0.3 0.62"><img src="telas/65-auditoria-ip-bloqueado.jpg" width="1366" height="749" loading="lazy" decoding="async" alt="IP bloqueado com prazo e motivo"></div>
+        <figcaption>Auditoria e bloqueio de IP com prazo e motivo.</figcaption>
+      </figure>
+      <div class="cap__texto sc-stack" data-sc-in data-sc-stagger="60">
+        <p class="cap__num">VI</p>
+        <h2 class="cap__h2">Quem entra, de onde, e quanto cada loja&nbsp;usa.</h2>
+        <p class="regra"><span class="regra__n" data-sc-count="0 10" data-sc-count-at="0.2 0.45">10</span> falhas do mesmo IP em <span class="regra__n" data-sc-count="0 15" data-sc-count-at="0.22 0.47">15</span> minutos bloqueiam o IP por <span class="regra__n" data-sc-count="0 60" data-sc-count-at="0.24 0.5">60</span> minutos.</p>
+        <p class="cap__corpo">Cada tentativa de login fica registrada com IP, país e a intenção provável: erro de digitação, usuário inexistente, força bruta ou robô. A rede interna nunca é bloqueada, e IPs ou faixas podem ser bloqueados ou liberados à mão, com prazo e motivo.</p>
+        <p class="cap__corpo">Na mesma tela, o uso por loja ou por usuário: acessos, orçamentos e pedidos no período, com o valor.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VII · Na bancada: o que já entrou e o que está em obra -->
+  <section id="bancada" class="cap chao-escuro" data-capitulo="VII" data-titulo="Na bancada">
+    <div class="cap__grade cap__grade--bancada">
+      <div class="cap__texto sc-stack" data-sc-in data-sc-stagger="60">
+        <p class="cap__num">VII</p>
+        <h2 class="cap__h2">Na bancada.</h2>
+        <p class="cap__corpo">O WINAI cresce por etapas, e cada uma só avança com a anterior testada em homologação.</p>
+      </div>
+      <div class="listas" data-sc-in data-sc-stagger="70">
+        <div>
+          <h3>Em produção</h3>
+          <ul>
+            <li>PIX no caixa do Winthor: cobrança, baixa, cancelamento e devolução, ciclo validado</li>
+            <li>Envio diário ao OTO CRM, no lugar dos fluxos antigos</li>
+            <li>Auditoria de acessos e bloqueio de IP</li>
+            <li>Conferência de bônus e aplicativo instalável</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Em andamento</h3>
+          <ul>
+            <li>Piloto da NFC-e do caixa web em produção</li>
+            <li>Faturar a venda do caixa como o Winthor fatura o cupom</li>
+            <li>TEF com pinpad no caixa web</li>
+            <li>Hub de marketplaces, começando pela Magis5</li>
+            <li>Perfil do usuário e verificação em duas etapas</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Colofão: o fechamento fica parado, tipo pequeno, convite em texto corrido -->
+  <footer class="colofao chao-papel" data-capitulo="" data-titulo="">
+    <div class="colofao__miolo">
+      <img class="colofao__logo" src="winai-logo.png" width="56" height="56" alt="">
+      <p class="colofao__convite">Quer conhecer ou implantar o WINAI na sua rede? <a href="https://github.com/jonales/winai-site/issues/new">Fale com a gente</a>.</p>
+      <p class="colofao__ficha">WINAI Gestão Integrada, desenvolvido por 4C3RT0 Sistemas. Aplicação web em Java 21 com Spring Boot, telas em Jakarta Faces com PrimeFaces, banco Oracle (o mesmo do Winthor) e Apache Tomcat. Estrutura do banco versionada com Flyway; testes automatizados a cada versão gerada.</p>
+      <p class="colofao__ficha">Capturas feitas em homologação, com dados desfocados. O código-fonte é privado. © 2025-2026, todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+</main>
+
+<script src="scrollcraft.js"></script>
+<script>ScrollCraft.mount(document.body);</script>
+<script src="site.js"></script>
+</body>
+</html>

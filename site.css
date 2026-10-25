@@ -1,0 +1,439 @@
+/* WINAI · página de apresentação
+   Tokens da marca (do logo: azul-noite e laranja) e a composição da página.
+   O scrollcraft.css é o mecanismo e não é editado aqui. */
+
+:root {
+  --sc-canvas:     #0c1220;
+  --sc-surface:    #151d30;
+  --sc-ink:        #eeece7;
+  --sc-ink-soft:   #a9b1c1;
+  --sc-accent:     #f37021;
+  --sc-accent-ink: #0c1220;
+  --sc-font-display: "Archivo", system-ui, sans-serif;
+  --sc-font-text:    "Geist", system-ui, sans-serif;
+  --sc-font-mono:    "Geist Mono", ui-monospace, monospace;
+  --sc-shadow-color: 222 45% 4%;
+
+  --papel:      #f2eee7;
+  --papel-ink:  #131a28;
+  --papel-soft: #4b5466;
+  --papel-acc:  #a8470b;
+
+  --margem: clamp(1.25rem, 5vw, 5.5rem);
+  --folio-w: 0px;
+}
+@media (min-width: 1000px) {
+  :root { --folio-w: 5.5rem; }
+}
+
+body { background: var(--sc-canvas); }
+
+/* Chão de cada capítulo: corte seco, sem gradiente entre um e outro.
+   A cor é redeclarada junto do token, senão o texto herda a tinta do body. */
+.chao-escuro { background: var(--sc-canvas); color: var(--sc-ink); }
+.chao-papel {
+  --sc-ink: var(--papel-ink);
+  --sc-ink-soft: var(--papel-soft);
+  --sc-accent: var(--papel-acc);
+  --sc-accent-ink: #fff8f0;
+  --sc-hairline: color-mix(in oklab, var(--papel-ink) 14%, transparent);
+  --sc-shadow-color: 30 25% 30%;
+  background: var(--papel);
+  color: var(--sc-ink);
+}
+
+/* Pular para o conteúdo */
+.pular {
+  position: fixed; left: 1rem; top: 1rem; z-index: 100;
+  padding: 0.6rem 1rem; border-radius: var(--sc-r-sm);
+  background: var(--sc-accent); color: var(--sc-accent-ink);
+  transform: translateY(-200%);
+}
+.pular:focus-visible { transform: none; }
+
+/* ------------------------------------------------------------------ fólio */
+.folio {
+  position: fixed; z-index: var(--sc-z-chrome);
+  left: 0; top: 0; bottom: 0; width: var(--folio-w);
+  display: flex; flex-direction: column; align-items: center;
+  padding-block: 1.6rem 1.8rem;
+  color: var(--sc-ink);
+  pointer-events: none;
+  background: var(--sc-canvas);
+  transition: color var(--sc-d-base) var(--sc-ease-out), background-color var(--sc-d-base) var(--sc-ease-out);
+}
+body[data-chao="papel"] .folio { color: var(--papel-ink); background: var(--papel); }
+.folio a { pointer-events: auto; color: inherit; text-decoration: none; }
+.folio__marca img { width: 28px; height: 28px; }
+.folio__lista {
+  list-style: none; margin: 2.4rem 0 0; padding: 0;
+  display: flex; flex-direction: column; gap: 0.15rem; align-items: center;
+}
+.folio__lista a {
+  display: block; min-width: 2.75rem; padding: 0.35rem 0.4rem;
+  text-align: center; border-radius: var(--sc-r-sm);
+  font-family: var(--sc-font-display); font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.04em; opacity: 0.42;
+  transition: opacity var(--sc-d-fast) var(--sc-ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .folio__lista a:hover { opacity: 0.9; }
+}
+.folio__lista a[aria-current="true"] { opacity: 1; }
+.folio__lista a[aria-current="true"]::after {
+  content: ""; display: block; height: 2px; width: 1.1rem; margin: 0.2rem auto 0;
+  background: var(--sc-accent);
+}
+body[data-chao="papel"] .folio__lista a[aria-current="true"]::after { background: var(--papel-acc); }
+.folio__atual {
+  margin: auto 0 0; writing-mode: vertical-rl; transform: rotate(180deg);
+  font-family: var(--sc-font-display); font-size: 0.82rem; letter-spacing: 0.06em;
+  white-space: nowrap; display: flex; gap: 0.7rem; align-items: center;
+}
+.folio__num { font-weight: 700; }
+.folio__titulo { opacity: 0.72; }
+
+@media (max-width: 999px) {
+  /* No celular o fólio vira uma linha discreta no canto de baixo. */
+  .folio {
+    top: auto; right: auto; bottom: max(0.9rem, env(safe-area-inset-bottom));
+    left: 0.9rem; width: auto; flex-direction: row; padding: 0.45rem 0.85rem;
+    border-radius: var(--sc-r-pill);
+    background: color-mix(in oklab, var(--sc-canvas) 86%, transparent);
+    color: var(--sc-ink);
+    box-shadow: var(--sc-e2);
+    opacity: 0; transition: opacity var(--sc-d-base) var(--sc-ease-out);
+  }
+  body[data-chao="papel"] .folio { color: var(--sc-ink); background: color-mix(in oklab, var(--sc-canvas) 86%, transparent); }
+  body.tem-capitulo .folio { opacity: 1; }
+  .folio__marca, .folio__lista { display: none; }
+  .folio__atual { writing-mode: horizontal-tb; transform: none; margin: 0; font-size: 0.78rem; gap: 0.5rem; }
+}
+
+/* --------------------------------------------------------- folha de rosto */
+.rosto {
+  min-height: 100svh;
+  display: grid; grid-template-rows: 1fr auto;
+  padding: var(--sc-7) var(--margem) var(--sc-6) calc(var(--folio-w) + var(--margem));
+}
+.rosto__miolo { align-self: center; max-width: 64rem; }
+.rosto__marca {
+  display: flex; align-items: center; gap: 0.9rem; margin: 0 0 var(--sc-7);
+  font-family: var(--sc-font-display); font-weight: 600; font-size: var(--sc-t-base);
+  letter-spacing: 0.01em;
+}
+.rosto__titulo {
+  margin: 0; font-family: var(--sc-font-display);
+  font-size: clamp(3rem, 1.4rem + 6.6vw, 8.25rem);
+  font-weight: 650; font-stretch: 88%;
+  line-height: 0.95; letter-spacing: -0.04em; text-wrap: balance;
+}
+.rosto__sub {
+  margin: var(--sc-6) 0 0; max-width: 38ch;
+  font-size: var(--sc-t-lg); line-height: 1.5; color: var(--sc-ink-soft); text-wrap: pretty;
+}
+.rosto__rodape {
+  display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin: 0;
+  padding-top: var(--sc-4); border-top: 1px solid var(--sc-hairline);
+  font-size: var(--sc-t-sm); color: var(--sc-ink-soft);
+}
+
+/* -------------------------------------------------------------- capítulos */
+.cap { padding: var(--sc-section) var(--margem) var(--sc-section) calc(var(--folio-w) + var(--margem)); }
+.cap__grade { max-width: 84rem; margin-inline: auto; display: grid; gap: var(--sc-8) var(--sc-9); }
+.cap__num {
+  margin: 0 0 var(--sc-5) !important;
+  font-family: var(--sc-font-display); font-weight: 700; font-size: var(--sc-t-sm);
+  letter-spacing: 0.1em; color: var(--sc-accent);
+}
+.cap__h2 {
+  margin: 0; font-family: var(--sc-font-display);
+  font-size: var(--sc-t-3xl); font-weight: 620; font-stretch: 92%;
+  line-height: 1; letter-spacing: -0.032em; text-wrap: balance;
+}
+.cap__texto .cap__h2 + * { margin-top: var(--sc-6); }
+.cap__corpo { margin: 0; max-width: 58ch; color: var(--sc-ink-soft); text-wrap: pretty; }
+.cap__corpo b { color: var(--sc-ink); font-weight: 600; }
+.cap__corpo + .cap__corpo { margin-top: var(--sc-4); }
+.chao-escuro .cap__corpo { line-height: 1.68; letter-spacing: 0.002em; }
+
+/* Mídia: a tela real numa coluna, com legenda. Nunca embaixo do texto. */
+.midia { margin: 0; position: relative; }
+.midia__quadro {
+  overflow: hidden; border-radius: var(--sc-r-md);
+  background: #fff; box-shadow: var(--sc-e3), var(--sc-edge);
+  outline: 1px solid var(--sc-hairline);
+}
+.midia__quadro img { width: 100%; height: auto; }
+.midia__quadro--recorte, .midia__quadro--alto { aspect-ratio: 16 / 11; }
+.midia__quadro--recorte img, .midia__quadro--alto img { height: 100%; object-fit: cover; object-position: top center; }
+.midia figcaption {
+  margin-top: var(--sc-4); max-width: 52ch;
+  font-size: var(--sc-t-sm); line-height: 1.5; color: var(--sc-ink-soft);
+}
+
+/* I · O balcão */
+.cap__grade--balcao { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: center; }
+.midia--balcao { padding-bottom: 12%; }
+.midia--balcao .midia__quadro--sobre {
+  position: absolute; width: 46%; right: -4%; bottom: 7%;
+  box-shadow: var(--sc-e3), 0 0 0 6px var(--papel);
+}
+.midia--balcao figcaption { position: absolute; bottom: -2.2rem; left: 0; width: 52%; }
+
+/* II · Direto no Winthor */
+.cap__grade--winthor { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: start; }
+.rotinas table { width: 100%; border-collapse: collapse; }
+.rotinas caption {
+  caption-side: top; text-align: left; padding-bottom: var(--sc-4);
+  font-size: var(--sc-t-sm); color: var(--sc-ink-soft);
+}
+.rotinas th {
+  text-align: left; font-weight: 500; font-size: var(--sc-t-xs); letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--sc-ink-soft); padding: 0 0 var(--sc-3); border-bottom: 1px solid var(--sc-hairline-strong);
+}
+.rotinas td { padding: 0.95rem 1rem 0.95rem 0; border-bottom: 1px solid var(--sc-hairline); vertical-align: baseline; }
+.rotinas td:first-child {
+  font-family: var(--sc-font-display); font-size: var(--sc-t-xl); font-weight: 650; font-stretch: 85%;
+  color: var(--sc-accent); width: 5.5rem; font-variant-numeric: tabular-nums; letter-spacing: -0.01em;
+}
+.rotinas td:nth-child(2) { color: var(--sc-ink-soft); width: 34%; }
+
+/* Intertítulo: uma tela quase vazia, de propósito */
+.intertitulo {
+  min-height: 100svh; display: grid; align-items: end;
+  padding: var(--sc-7) var(--margem) var(--sc-9) calc(var(--folio-w) + var(--margem));
+}
+.intertitulo__miolo { max-width: 60rem; }
+.intertitulo__num {
+  margin: 0; font-family: var(--sc-font-display); font-weight: 300; font-stretch: 70%;
+  font-size: clamp(7rem, 22vw, 20rem); line-height: 0.8; letter-spacing: -0.05em;
+  color: color-mix(in oklab, var(--sc-ink) 16%, transparent);
+}
+.intertitulo__linha {
+  margin: var(--sc-5) 0 0; font-family: var(--sc-font-display); font-weight: 560;
+  font-size: var(--sc-t-2xl); letter-spacing: -0.025em; line-height: 1.05;
+}
+
+/* ---------------------------------------------------------- III · a venda */
+.venda__palco {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(16rem, 22vw, 19.5rem);
+  grid-template-rows: auto auto minmax(0, 1fr);
+  column-gap: clamp(2rem, 4vw, 5rem);
+  padding: clamp(1.4rem, 4vh, 2.6rem) var(--margem) 0 calc(var(--folio-w) + var(--margem));
+}
+.venda__cabeca {
+  grid-column: 1; margin: 0;
+  font-family: var(--sc-font-display); font-size: var(--sc-t-sm); font-weight: 600;
+  letter-spacing: 0.06em; color: var(--sc-ink-soft);
+}
+.venda__passos {
+  grid-column: 1; position: relative; list-style: none; margin: var(--sc-5) 0 0; padding: 0;
+  min-height: 8.6rem;
+}
+.venda__passos li { position: absolute; inset: 0 0 auto 0; max-width: 46rem; }
+.venda__etapa {
+  display: block; font-family: var(--sc-font-display);
+  font-size: var(--sc-t-2xl); font-weight: 640; font-stretch: 90%; letter-spacing: -0.03em; line-height: 1;
+}
+.venda__passos p { margin: var(--sc-3) 0 0; max-width: 54ch; color: var(--sc-ink-soft); line-height: 1.6; }
+.venda__telas { grid-column: 1; position: relative; margin: var(--sc-4) 0 clamp(1.5rem, 5vh, 3rem); min-height: 0; }
+.venda__tela {
+  position: absolute; inset: 0; margin: 0;
+  display: flex; flex-direction: column;
+}
+.venda__tela img {
+  flex: 1 1 auto; min-height: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: top left;
+  border-radius: var(--sc-r-md); background: #fff;
+  box-shadow: var(--sc-e3), var(--sc-edge);
+}
+.venda__tela--danfe img { object-fit: contain; object-position: center; background: #e9e6df; padding: 1rem; }
+.venda__tela figcaption { margin-top: var(--sc-3); font-size: var(--sc-t-sm); color: var(--sc-ink-soft); }
+
+/* A bobina */
+.bobina { grid-column: 2; grid-row: 1 / -1; position: relative; }
+.bobina__impressora {
+  position: absolute; left: -1.1rem; right: -1.1rem; bottom: clamp(1.25rem, 6vh, 3.5rem);
+  height: 4.6rem; border-radius: 14px 14px 18px 18px;
+  background: linear-gradient(#272f42, #1b2233);
+  box-shadow: var(--sc-e3), inset 0 1px 0 rgba(255,255,255,0.08);
+  z-index: 2;
+}
+.bobina__fenda {
+  position: absolute; left: 0.85rem; right: 0.85rem; top: 0.7rem; height: 5px; border-radius: 3px;
+  background: #070a12; box-shadow: inset 0 1px 2px rgba(0,0,0,0.8);
+}
+.bobina__luz {
+  position: absolute; right: 1.2rem; bottom: 1.1rem; width: 7px; height: 7px; border-radius: 50%;
+  background: #3fbf6a; box-shadow: 0 0 0 3px color-mix(in oklab, #3fbf6a 25%, transparent);
+}
+.venda.esta-imprimindo .bobina__luz { background: var(--sc-accent); box-shadow: 0 0 0 3px color-mix(in oklab, var(--sc-accent) 28%, transparent); }
+/* A janela vai do topo do palco até a fenda: o papel só aparece acima dela. */
+.bobina__janela {
+  position: absolute; left: 0; right: 0; top: 0;
+  bottom: calc(clamp(1.25rem, 6vh, 3.5rem) + 4.6rem - 0.95rem);
+  overflow: hidden;
+}
+.bobina__papel {
+  position: absolute; left: 0; right: 0; top: 100%;
+  padding: 1.1rem 1rem 0.6rem;
+  background: #fbfaf6; color: #23262c;
+  font-family: var(--sc-font-mono); font-size: 0.74rem; line-height: 1.55; letter-spacing: 0;
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.55);
+  transform: translate3d(0, calc(var(--impresso, 0) * -1px), 0) rotate(var(--giro, 0deg));
+  transform-origin: 50% 100%;
+  will-change: transform;
+}
+.bobina__papel p { margin: 0; white-space: pre-wrap; }
+.r-c { text-align: center; }
+.r-forte { font-weight: 600; }
+.r-grande { font-size: 0.86rem; }
+.r-caixa { border: 1px solid #23262c; padding: 0.15rem 0.3rem; margin: 0.35rem 0 !important; font-size: 0.66rem; }
+.r-l { display: flex; justify-content: space-between; gap: 0.6rem; }
+.r-l span:last-child { font-variant-numeric: tabular-nums; }
+.r-sep { height: 0; border-top: 1px dashed #8b8f97; margin: 0.55rem 0 !important; }
+.r-qr {
+  width: 84px; height: 84px; margin: 0.6rem auto 0.3rem;
+  background: url("telas/61-danfe-nfce.jpg") no-repeat;
+  background-size: 300px auto; background-position: -108px -434px;
+}
+.r-serrilha {
+  height: 10px; margin: 0.9rem -1rem -0.6rem !important;
+  background:
+    linear-gradient(135deg, #fbfaf6 50%, transparent 50%) 0 0 / 10px 10px repeat-x,
+    linear-gradient(225deg, #fbfaf6 50%, transparent 50%) 0 0 / 10px 10px repeat-x;
+}
+.bobina__trecho { transition: opacity 260ms var(--sc-ease-out); }
+
+/* ------------------------------------------------------------ IV · sozinho */
+.cap__grade--sozinho {
+  grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+  grid-template-areas: "texto placar" "midia midia";
+  align-items: end;
+}
+.cap__grade--sozinho .cap__texto { grid-area: texto; }
+.cap__grade--sozinho .cap__corpo + .cap__corpo { margin-top: var(--sc-5); }
+.placar { grid-area: placar; margin: 0; border-top: 1px solid var(--sc-hairline-strong); padding-top: var(--sc-5); }
+.placar__item { margin: 0 0 var(--sc-5); display: flex; flex-direction: column; }
+.placar__n {
+  font-family: var(--sc-font-display); font-weight: 600; font-stretch: 80%;
+  font-size: clamp(3.6rem, 2rem + 6vw, 7rem); line-height: 0.9; letter-spacing: -0.045em;
+  font-variant-numeric: tabular-nums; color: var(--sc-ink);
+}
+.placar__r { margin-top: var(--sc-2); color: var(--sc-ink-soft); }
+.placar__nota { margin: 0; font-size: var(--sc-t-sm); color: var(--sc-ink-soft); }
+.midia--sozinho { grid-area: midia; }
+.midia--sozinho .midia__quadro--recorte { aspect-ratio: 16 / 8; }
+
+/* -------------------------------------------------------------- V · acervo */
+.acervo__palco { display: flex; align-items: center; }
+.acervo__trilho {
+  gap: clamp(1.5rem, 3vw, 3rem); align-items: flex-start;
+  padding-left: calc(var(--folio-w) + var(--margem)); padding-right: var(--margem);
+}
+.acervo__abre, .acervo__fecha { flex: 0 0 auto; width: clamp(15rem, 24vw, 22rem); align-self: center; }
+.acervo__abre .cap__corpo { margin-top: var(--sc-5); }
+.acervo__fecha p { margin: 0; font-size: var(--sc-t-lg); line-height: 1.45; color: var(--sc-ink-soft); text-wrap: pretty; }
+.peca { flex: 0 0 auto; width: clamp(17rem, 27vw, 25rem); }
+.peca__img {
+  aspect-ratio: 4 / 3; overflow: hidden; border-radius: var(--sc-r-md); background: #fff;
+  box-shadow: var(--sc-e3), var(--sc-edge);
+}
+.peca__img img { width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+.peca h3 {
+  margin: var(--sc-5) 0 0; font-family: var(--sc-font-display); font-weight: 620; font-stretch: 90%;
+  font-size: var(--sc-t-xl); letter-spacing: -0.02em; line-height: 1;
+}
+.peca__quem {
+  margin: var(--sc-2) 0 0 !important; font-size: var(--sc-t-xs); letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--sc-accent) !important;
+}
+.peca p { margin: var(--sc-3) 0 0; color: var(--sc-ink-soft); font-size: var(--sc-t-sm); line-height: 1.55; max-width: 34ch; }
+
+/* --------------------------------------------------------- VI · quem entra */
+.cap__grade--acesso { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: center; }
+.cap__grade--acesso .cap__h2 { font-size: var(--sc-t-2xl); }
+.midia--acesso { padding-bottom: 14%; }
+.midia--acesso .midia__quadro--sobre {
+  position: absolute; width: 58%; left: -3%; bottom: 3%;
+  box-shadow: var(--sc-e3), 0 0 0 6px var(--papel);
+}
+.midia--acesso figcaption { position: absolute; right: 0; bottom: -2.2rem; width: 38%; text-align: right; }
+.regra {
+  margin: var(--sc-6) 0 var(--sc-6) !important; max-width: 24ch;
+  font-family: var(--sc-font-display); font-size: var(--sc-t-xl); font-weight: 500; line-height: 1.3; letter-spacing: -0.015em;
+}
+.regra__n { color: var(--sc-accent); font-weight: 700; font-variant-numeric: tabular-nums; }
+.cap__grade--acesso .cap__corpo + .cap__corpo { margin-top: var(--sc-4); }
+
+/* ---------------------------------------------------------- VII · bancada */
+.cap__grade--bancada { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); align-items: start; }
+.listas { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sc-7); }
+.listas h3 {
+  margin: 0 0 var(--sc-4); font-family: var(--sc-font-display); font-size: var(--sc-t-lg); font-weight: 620;
+  padding-bottom: var(--sc-3); border-bottom: 1px solid var(--sc-hairline-strong);
+}
+.listas ul { list-style: none; margin: 0; padding: 0; }
+.listas li { padding: 0.7rem 0; border-bottom: 1px solid var(--sc-hairline); color: var(--sc-ink-soft); line-height: 1.5; }
+.listas li::before { content: ""; display: inline-block; width: 6px; height: 6px; margin: 0 0.7rem 0.15rem 0; border-radius: 50%; background: var(--sc-accent); }
+
+/* --------------------------------------------------------------- colofão */
+.colofao {
+  min-height: 100svh; display: grid; align-items: center;
+  padding: var(--sc-9) var(--margem) var(--sc-8) calc(var(--folio-w) + var(--margem));
+}
+.colofao__miolo { max-width: 40rem; }
+.colofao__logo { width: 56px; height: 56px; margin-bottom: var(--sc-6); }
+.colofao__convite {
+  margin: 0 0 var(--sc-7); font-family: var(--sc-font-display); font-size: var(--sc-t-xl); font-weight: 500;
+  line-height: 1.3; letter-spacing: -0.015em; text-wrap: balance;
+}
+.colofao__convite a { color: var(--sc-accent); text-decoration-thickness: 2px; text-underline-offset: 0.18em; transition: color var(--sc-d-fast) var(--sc-ease-out); }
+@media (hover: hover) and (pointer: fine) { .colofao__convite a:hover { color: var(--sc-ink); } }
+.colofao__convite a:active { color: var(--sc-ink); }
+.colofao__ficha { margin: 0 0 var(--sc-4); max-width: 60ch; font-size: var(--sc-t-sm); line-height: 1.6; color: var(--sc-ink-soft); }
+
+/* --------------------------------------------------------------- celular */
+@media (max-width: 999px) {
+  .cap__grade--balcao, .cap__grade--winthor, .cap__grade--acesso, .cap__grade--bancada { grid-template-columns: 1fr; }
+  .cap__grade--sozinho { grid-template-columns: 1fr; grid-template-areas: "texto" "placar" "midia"; }
+  .midia--balcao figcaption, .midia--acesso figcaption { position: static; width: auto; text-align: left; }
+  .midia--balcao, .midia--acesso { padding-bottom: 0; }
+  .midia--balcao .midia__quadro--sobre, .midia--acesso .midia__quadro--sobre { position: relative; width: 70%; right: auto; left: auto; bottom: auto; margin: -18% 0 0 auto; }
+  .midia--acesso .midia__quadro--sobre { margin: -18% auto 0 0; }
+}
+@media (max-width: 860px) {
+  .listas { grid-template-columns: 1fr; gap: var(--sc-6); }
+  .rotinas td:nth-child(2) { display: none; }
+  .rotinas th:nth-child(2) { display: none; }
+  .rotinas td:first-child { width: 4.2rem; font-size: var(--sc-t-lg); }
+  .placar { display: grid; grid-template-columns: 1fr 1fr; gap: 0 var(--sc-5); }
+  .placar__nota { grid-column: 1 / -1; }
+
+  /* A venda no celular: passo e tela em cima, bobina embaixo. */
+  .venda__palco {
+    grid-template-columns: 1fr; grid-template-rows: auto auto minmax(0, 0.9fr) minmax(0, 1.1fr);
+    padding-top: 1.1rem;
+  }
+  .venda__passos { min-height: 7.4rem; margin-top: var(--sc-3); }
+  .venda__etapa { font-size: var(--sc-t-xl); }
+  .venda__passos p { font-size: var(--sc-t-sm); line-height: 1.5; }
+  .venda__telas { margin: var(--sc-2) 0 var(--sc-3); }
+  .venda__tela figcaption { display: none; }
+  .bobina { grid-column: 1; grid-row: 4; width: min(15.5rem, 70vw); justify-self: center; }
+  .bobina__impressora { bottom: max(4.2rem, calc(env(safe-area-inset-bottom) + 3.6rem)); height: 3.6rem; }
+  .bobina__janela { bottom: calc(max(4.2rem, calc(env(safe-area-inset-bottom) + 3.6rem)) + 3.6rem - 0.95rem); }
+  .bobina__papel { font-size: 0.66rem; padding: 0.8rem 0.75rem 0.5rem; }
+  .r-qr { width: 70px; height: 70px; background-size: 250px auto; background-position: -90px -362px; }
+}
+@media (max-width: 700px) {
+  .cap__h2 { font-size: var(--sc-t-2xl); }
+}
+
+/* -------------------------------------------------------- menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  .bobina__papel { transform: translate3d(0, calc(var(--impresso, 0) * -1px), 0); }
+  .pular { transition: none; }
+}
