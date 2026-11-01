@@ -437,3 +437,11 @@ body[data-chao="papel"] .folio__lista a[aria-current="true"]::after { background
   .bobina__papel { transform: translate3d(0, calc(var(--impresso, 0) * -1px), 0); }
   .pular { transition: none; }
 }
+
+/* print de celular por cima do painel (I) e no acervo (V): retrato, não paisagem */
+.midia--balcao .midia__quadro--celular { width: 21%; right: 2%; bottom: -4%; border-radius: 18px; }
+.peca__img--celular { background: #e9edf3; }
+.peca__img--celular img { object-fit: contain; object-position: center; }
+@media (max-width: 999px) {
+  .midia--balcao .midia__quadro--celular { width: 34%; }
+}
